@@ -1,5 +1,8 @@
+build_platform:
+  osx_arm64: osx_64
 conda_forge_output_validation: true
-upload_on_branch: main
 github:
   branch_name: main
   tooling_branch_name: main
+test_on_native_only: true
+upload_on_branch: main
