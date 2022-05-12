@@ -9,3 +9,5 @@ provider:
   linux_ppc64le: default
 test_on_native_only: true
 upload_on_branch: main
+bot:
+  automerge: true
