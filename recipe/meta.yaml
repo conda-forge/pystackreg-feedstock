@@ -1,6 +1,6 @@
 {% set name = "pystackreg" %}
-{% set version = "0.2.5" %}
-{% set sha256 = "5b38fb9059d2c5c59a69eb4c74c14bdd5e064552b37babacd239ede1d04b6258" %}
+{% set version = "0.2.6" %}
+{% set sha256 = "1485844fd4d8e88d92211be2994dbce65cffbfde8b7c33a51eaedbb95f14eae1" %}
 
 package:
   name: {{ name|lower }}
@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 2
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
