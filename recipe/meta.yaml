@@ -1,6 +1,6 @@
 {% set name = "pystackreg" %}
-{% set version = "0.2.7" %}
-{% set sha256 = "c3df8b42bb9f4d44ec7ba44b3c061d7ea7481ab62318c24a25ffdb22afbaf3ab" %}
+{% set version = "0.2.8" %}
+{% set sha256 = "fb615e9fb791298a196f7468cf0d2db1d5a008cde58d74c71afc2acb6a092dfc" %}
 
 package:
   name: {{ name|lower }}
@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 2
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
@@ -20,6 +20,7 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
   host:
     - python
