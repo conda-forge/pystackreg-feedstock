@@ -1,6 +1,6 @@
 {% set name = "pystackreg" %}
-{% set version = "0.2.8" %}
-{% set sha256 = "fb615e9fb791298a196f7468cf0d2db1d5a008cde58d74c71afc2acb6a092dfc" %}
+{% set version = "0.3.0" %}
+{% set sha256 = "84b9abab9b65df339b0e435f6a15475ce122e3a9fd10516a913d05b79ef8facb" %}
 
 package:
   name: {{ name|lower }}
@@ -11,8 +11,9 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 3
-  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+  skip: true  # [py<310]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
@@ -24,39 +25,40 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - python
-    - numpy
+    - numpy >=2.0
     - pip
-    - setuptools
+    - setuptools >=77
   run:
     - python
+    - numpy >=1.22
     - tqdm
 
 test:
   imports:
     - pystackreg
+    - pystackreg.turboreg
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/glichtner/pystackreg
-  license: LicenseRef-TurboReg-StackReg
-  license_file: LICENSE.txt
-  summary: Python implementation of the ImageJ/FIJI Plugin TurboReg/StackReg
+  doc_url: https://pystackreg.readthedocs.io/
+  dev_url: https://github.com/glichtner/pystackreg
+  license: GPL-3.0-or-later
+  license_file:
+    - LICENSE
+    - NOTICE
+  summary: Image registration (Python/C++ port of the ImageJ/Fiji plugins TurboReg and StackReg)
   description: |
-    C++ Port of the TurboReg/StackReg ImageJ Plugin.
-    Original code by Philippe Thevenaz (see below).
-    Porting by Gregor Lichtner.
+    pystackreg aligns (registers) images and image stacks. It is a Python/C++
+    port of the ImageJ plugins TurboReg and StackReg by Philippe Thevenaz
+    (EPFL), based on
 
-    This work is based on the following paper:
-
-    P. Thevenaz, U.E. Ruttimann, M. Unser
-    A Pyramid Approach to Subpixel Registration Based on Intensity
-    IEEE Transactions on Image Processing
+    P. Thevenaz, U.E. Ruttimann, M. Unser, "A Pyramid Approach to Subpixel
+    Registration Based on Intensity", IEEE Transactions on Image Processing,
     vol. 7, no. 1, pp. 27-41, January 1998.
-
-    This paper is available on-line at
-    http://bigwww.epfl.ch/publications/thevenaz9801.html
-
-    Other relevant on-line publications are available at
-    http://bigwww.epfl.ch/publications/
 
 extra:
   recipe-maintainers:
